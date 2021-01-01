@@ -51,7 +51,7 @@ However, script blocks of arbitrary complexity may also be used.
 A number of samples are provided as part of the module, you can see these in
 the Samples directory in the module base directory.
 
-A very simple example is as follows to wrap the unix `/bin/ls` command:
+A very simple example this configuration to create a wrapper function for the unix `/bin/ls` command:
 
 ```json
 {
@@ -84,7 +84,7 @@ A couple of things to note about the Path parameter
 In this example, there is no output handler defined, so the text output of the
 command will be returned to the pipeline.
 
-A more complicated example which wraps the linux `apt` command follows:
+Here is a more complicated example which creates a wrapper function for the linux `apt` command:
 
 ```json
 {
@@ -111,7 +111,7 @@ to enable using other PowerShell cmdlets. When run, this provides an object
 which encapsulates the apt output
 
 ```powershell
-PS> get-installedpackage | ?{ $_.name -match "libc"} 
+PS> get-installedpackage | where-object { $_.name -match "libc"} 
 
 Name        Version            Architecture State
 ----        -------            ------------ -----
@@ -121,7 +121,7 @@ libcap-ng0  0.7.9-2.1build1    amd64        {installed, local}
 libcom-err2 1.45.5-2ubuntu1    amd64        {installed, local}
 libcrypt1   1:4.4.10-10ubuntu4 amd64        {installed, local}
 
-PS> get-installedpackage | Group-Object Architecture
+PS> get-installedpackage | Group-Object -property Architecture
 
 Count Name  Group
 ----- ----  -----
